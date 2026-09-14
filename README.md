@@ -2,6 +2,8 @@
 
 Paras Arora's personal second brain and operating system for learning, creating, running a small business with a small team, and studying capital allocation.
 
+Private repository: [Parascoder3008/paras-ai-2.0](https://github.com/Parascoder3008/paras-ai-2.0). The linked Obsidian project is `projects/Paras AI 2.0/Paras AI 2.0.md`; verified delivery details are in [the last session](memory/last-session.md).
+
 **Content earns attention. Useful work earns trust. Community supports implementation. Businesses grow around verified needs. Invest OS is a separate research project.**
 
 ## Start here

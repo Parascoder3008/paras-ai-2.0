@@ -4,8 +4,8 @@ Checked 2026-09-14. Reachable APIs, local files and working business workflows a
 
 | System | Evidence in this session | Limit |
 |---|---|---|
-| GitHub | Connected account Parascoder3008; Windows credential account matches | Publication verified in final session record |
-| Obsidian | Existing vault and old AI OS Master Map read through local files | No Obsidian MCP tool exposed; curated sync uses direct files with a receipt |
+| GitHub | Private Parascoder3008/paras-ai-2.0 repository and matching remote/local foundation commit verified using the owner's Windows sign-in | Connector lookup returned 404; Windows-authenticated API verification succeeded. Final commit receipt is local |
+| Obsidian | All 16 curated notes written and read back successfully; historical Master Map backed up and preserved | Direct-file sync when invoked; no background sync or Obsidian MCP connection implied |
 | GHL | Authenticated read-only contacts request returned HTTP 200 | Consent completeness and full customer workflow unverified |
 | n8n | Authenticated read-only workflow-list request returned HTTP 200 | Execution, ownership and monitoring unverified |
 | AiSensy | Credential presence detected | No safe read-only probe; no test send performed |

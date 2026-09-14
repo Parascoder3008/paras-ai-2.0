@@ -1702,8 +1702,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 3695,
-      "sha256": "6b7762e26a93e980ff00e7028e62b90071919ce434528050cfe5881179495539"
+      "bytes": 3944,
+      "sha256": "604d5013322d4c6fb6be54c3f127b1bb5b517e54d8e4575278ebfe5c8bdccd36"
     },
     {
       "path": "Start-Paras-AI.bat",
@@ -1732,8 +1732,8 @@
     },
     {
       "path": "ai-os/README.md",
-      "bytes": 2840,
-      "sha256": "67aa836bd4e998d548460488bd00d0dad01a6cb110f2da464749cd671bd394d0"
+      "bytes": 3020,
+      "sha256": "c0604a42a7ae2be49f6be1aca9c2bdcd4c63c9225e9d0949ed3ee76b3c66796a"
     },
     {
       "path": "ai-os/VISION.md",
@@ -1757,8 +1757,8 @@
     },
     {
       "path": "ai-os/audits/2026-09-14-paras-ai-2.0.md",
-      "bytes": 9787,
-      "sha256": "2beb185958f2b7bc341c6fa5c82cc7d7194071115771c4845065c6969db7564e"
+      "bytes": 9962,
+      "sha256": "23d7820c8f92fd9ec1d06c11d6d1c253711b6547ded82b6cf959e56818ae93ba"
     },
     {
       "path": "ai-os/audits/capability-inventory.json",
@@ -1867,8 +1867,8 @@
     },
     {
       "path": "connections.md",
-      "bytes": 2070,
-      "sha256": "bbc339cb3987737dce336f2e6a8df38535f151b85ff537d3d1efeb3db6b99208"
+      "bytes": 2248,
+      "sha256": "229b9816d7bcb6cbe24de2f8bc29e556516a0476feeefcbb036e419a011809e3"
     },
     {
       "path": "context/business.md",
@@ -2107,8 +2107,8 @@
     },
     {
       "path": "ledger/paras.md",
-      "bytes": 5572,
-      "sha256": "c6731705ee43770f11341b7c26a8406a6020ad0d7cf37fe42791be22746f6e3a"
+      "bytes": 6075,
+      "sha256": "48fee62cdb576b6f5d7d7deaad12fafd154a21d63dd6c88bedeba476854a8a7c"
     },
     {
       "path": "memory/README.md",
@@ -2122,8 +2122,8 @@
     },
     {
       "path": "memory/last-session.md",
-      "bytes": 2137,
-      "sha256": "9cf08021313b95152be7345996862c3d87b6f0af74d3996257d60c5c4ad47507"
+      "bytes": 3698,
+      "sha256": "6734100926cc9deb1f14d7ace453d7f23ba4f6f552a00b6949659e0084637be0"
     },
     {
       "path": "memory/projects.json",
@@ -2252,8 +2252,8 @@
     },
     {
       "path": "scripts/sync-obsidian.cjs",
-      "bytes": 9662,
-      "sha256": "7ed1d99b4e32bb220f2ad709a5e8a3e3f2978a9fc35f92996c284f7b50dcf6ab"
+      "bytes": 9764,
+      "sha256": "43becbb94ca2e2e6ef99266d5a06801f4e9485d907a8e6c881afd01652823973"
     },
     {
       "path": "scripts/test_brain_search.py",
@@ -2292,6 +2292,6 @@
     }
   ],
   "file_count": 456,
-  "bytes": 2909847,
+  "bytes": 2912795,
   "findings": []
 }

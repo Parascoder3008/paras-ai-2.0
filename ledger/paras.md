@@ -8,6 +8,8 @@ Types: `build` · `decision` · `ship` · `research` · `note`. Distinct from `a
 
 ---
 
+- 2026-09-14 · paras · workspace/ship · Completed the authorized Paras AI 2.0 delivery: 16 curated Obsidian notes applied with read-back verification and historical Master Map backup. Confirmed the existing private Parascoder3008/paras-ai-2.0 repository and matching foundation commit, then prepared the final completion record. Exact final GitHub and Obsidian receipts stay in ignored outputs. Original workspace changes and separate project histories preserved; business execution remains separate.
+
 - 2026-09-13 · paras · content/build · Finished the Sep 14–27 sprint pack the board already referenced but disk did not have: OS03 and OS04 outlines, 14 daily short drafts, the Business System Starter Kit resource, and community onboarding/moderation drafts. All drafts; no resource hosted, no send, no publication.
 - 2026-09-13 · paras · ops/build · `ops.cjs check` was reporting configuration_valid with five board rows pointing at files that did not exist. `validate()` now fails on any package or evidence path missing from disk, with a test. Nine ops tests pass; readiness still exits 2 on eleven open business blockers.
 

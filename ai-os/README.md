@@ -9,6 +9,7 @@ Primary: 200 active paid course-plus-mentorship members in the entrepreneurs imp
 - All 53 roles and 73 workspace skills inventoried; missing skill references and stale entry instructions repaired.
 - Dashboard uses current plan and curated memory; server/configuration files are blocked from static routes.
 - Research-backed audit and portable-restore plan; isolated source export with a secret scan.
+- Private GitHub repository published and verified; 16 curated Obsidian notes synchronized with backups and read-back checks. See the completion receipts in the last-session note.
 - Canonical current plan, dated verified social/community baseline and named team.
 - 14-day production board, two full recording packages and two follow-up outlines, 14 short scripts.
 - CLI for daily queues, readiness, provisional economics and publication prerequisites.
