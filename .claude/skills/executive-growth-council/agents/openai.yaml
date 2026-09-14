@@ -1,0 +1,5 @@
+interface:
+  display_name: "Executive Business Growth Team"
+  short_description: "Five advisors turn business problems into action"
+  default_prompt: "Use $executive-growth-council to bring my five business advisors together, diagnose my situation, and tell me exactly what to do next."
+

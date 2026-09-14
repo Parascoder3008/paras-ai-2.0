@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "decision_date": "2026-09-13",
+  "source": "Paras instructions in current conversation",
+  "window": {
+    "start": "2026-09-14",
+    "end": "2026-12-12",
+    "status": "planning_assumption"
+  },
+  "goal": {
+    "active_paid_members": 200,
+    "youtube_subscribers": 100000,
+    "instagram_followers_minimum": 100001,
+    "social_deadline": null,
+    "member_definition": "Active paid course-plus-mentorship entitlement; free members excluded; annual purchase does not imply automatic renewal"
+  },
+  "focus": "Organic acquisition into AI entrepreneurs implementation membership",
+  "audience": "Hinglish-speaking owners of small service businesses building their first practical AI-assisted business system",
+  "offer": {
+    "annual_price_inr": 19999,
+    "price_status": "annual_and_monthly_confirmed",
+    "product": "Course plus long-term mentorship",
+    "outcome": "Build, test and demonstrate one working AI-assisted business system in the first month",
+    "outcome_status": "proposal_for_confirmation",
+    "future_markets": {
+      "uae_aed_per_month": 300,
+      "us_usd_per_month_options": [
+        49,
+        79
+      ],
+      "status": "future_not_launched"
+    },
+    "renewal_mechanism": "annual renewal and monthly cancellation terms to be specified",
+    "annual_billing": "one_time_for_12_months",
+    "monthly_price_inr": 3999,
+    "promotional_discount_inr": 500,
+    "promotional_monthly_price_inr": 3499,
+    "deeper_discount_candidate_inr": 2499,
+    "discount_policy": "No automatic discounts. Select and approve the exact campaign offer. INR 2499 is not active."
+  },
+  "budget": {
+    "monthly_inr": 200000,
+    "initial_paid_ads_inr": 0,
+    "actual_cost_breakdown": null,
+    "cash_available": null
+  },
+  "cadence": {
+    "record_daily": true,
+    "youtube_per_week": 2,
+    "youtube_days": [
+      "Tuesday",
+      "Friday"
+    ],
+    "shorts_per_day_min": 1,
+    "shorts_per_day_max": 2,
+    "language": "Hinglish",
+    "linkedin_per_week": 3,
+    "x_thread_per_youtube": 1,
+    "x_article_if_available": true,
+    "daily_short_observation_optional": true
+  },
+  "team": [
+    {
+      "name": "Paras",
+      "role": "Founder, teacher and final reviewer",
+      "capacity": "2h morning + 2h evening daily, user confirmed"
+    },
+    {
+      "name": "Sanchit",
+      "role": "Community manager",
+      "capacity": "unconfirmed"
+    },
+    {
+      "name": "Sudam",
+      "role": "Meta specialist; proposed attribution/reporting while ads paused",
+      "capacity": "unconfirmed"
+    },
+    {
+      "name": "Redima",
+      "role": "Content manager; proposed production coordinator",
+      "capacity": "unconfirmed"
+    },
+    {
+      "name": "Abhav",
+      "role": "Long-form editor",
+      "capacity": "unconfirmed"
+    },
+    {
+      "name": "Devan",
+      "role": "Short-form editor",
+      "capacity": "unconfirmed"
+    }
+  ],
+  "channels": {
+    "youtube_studio": "https://studio.youtube.com/channel/UCVajFgk5T0T1B3pzTxUwqIw",
+    "instagram": "https://www.instagram.com/ai_with_paras/reels/",
+    "skool": "https://www.skool.com/exponential-world-ai-2398",
+    "resource_landing_page": null
+  },
+  "blocked_secondary_work": [
+    "new agency expansion",
+    "new real-estate acquisition funnel",
+    "algo-trading course build",
+    "paid Meta tests",
+    "new general-purpose agents"
+  ],
+  "blockers": [
+    {
+      "id": "community-archived",
+      "owner": "Paras",
+      "status": "open",
+      "description": "Skool group has 411 members but is archived. Decide on observed $9/month reactivation; no purchase authorized."
+    },
+    {
+      "id": "copyright-school",
+      "owner": "Paras",
+      "status": "open",
+      "description": "Studio requests Copyright School; strike dialog shows Sep 20 expiry conditional on completion."
+    },
+    {
+      "id": "offer-confirmation",
+      "owner": "Paras",
+      "status": "open",
+      "description": "Pricing confirmed: INR 19,999 for 12 months or INR 3,999/month. Confirm support scope, billing/renewal terms, refund policy and primary checkout before selling."
+    },
+    {
+      "id": "paid-baseline",
+      "owner": "Sanchit",
+      "status": "open",
+      "description": "Reconcile current active paying members, cancellations and failed payments; free Skool members are not paid members."
+    },
+    {
+      "id": "resource-delivery",
+      "owner": "Redima",
+      "status": "open",
+      "description": "Host and test the selected resource, capture consent, confirm pinned comment and description before publishing."
+    },
+    {
+      "id": "payment-access",
+      "owner": "Sanchit",
+      "status": "open",
+      "description": "Verify paid checkout, subscription records, access grant and renewal/failure process end to end."
+    },
+    {
+      "id": "technical-owner",
+      "owner": "Paras",
+      "status": "open",
+      "description": "No automation maintainer is named; assign an owner and escalation path."
+    },
+    {
+      "id": "team-capacity",
+      "owner": "Redima",
+      "status": "open",
+      "description": "Confirm weekly throughput with Abhav and Devan and acceptance of proposed assignments."
+    },
+    {
+      "id": "moderation",
+      "owner": "Sanchit",
+      "status": "open",
+      "description": "Review two reported Skool posts, four requests and visible promotional posts; prepare start-here and community rules."
+    },
+    {
+      "id": "legacy-permission",
+      "owner": "Sanchit",
+      "status": "open",
+      "description": "Check past audience source, recency, opt-outs and channel-specific permission before proposing a small interest survey."
+    },
+    {
+      "id": "external-workflows",
+      "owner": "Paras",
+      "status": "open",
+      "description": "Authenticated workflow inventory, test receipts, publication approvals and an always-on monitoring owner are still needed."
+    }
+  ]
+}

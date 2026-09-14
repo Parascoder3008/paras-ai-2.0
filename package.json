@@ -1,0 +1,14 @@
+{
+  "name": "paras-ai-2.0",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Paras AI 2.0 personal second brain and three-pillar operating system",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "status": "node scripts/brain.cjs status",
+    "audit": "node scripts/audit-workspace.cjs --write",
+    "test": "node --test scripts/ops.test.cjs scripts/brain.test.cjs scripts/audit-workspace.test.cjs dashboard/test-runtime.cjs && node dashboard/test-voice.js"
+  }
+}

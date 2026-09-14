@@ -1,0 +1,242 @@
+{
+  "version": "2.0.0",
+  "name": "Paras AI 2.0",
+  "tagline": "A personal second brain. Content, business and capital research.",
+  "updated": "2026-08-07",
+  "note": "Single source of truth for the OS structure. The dashboard, the router, the installer and the clone kit all read THIS file — never a hardcoded list. Adding an agent means adding it here.",
+  "audience": {
+    "primary": [
+      "small business owners",
+      "medium business owners",
+      "content creators",
+      "consultants"
+    ],
+    "promise": "Build one working AI system, then let it run the parts of the business you shouldn't be doing by hand."
+  },
+  "pillars": {
+    "content": {
+      "name": "Content OS",
+      "order": 1,
+      "color": "#3AB0D8",
+      "icon": "◈",
+      "promise": "Teach from real work and build trust through useful content.",
+      "job": "Turn one idea into a week of native content across every platform, on-brand and compliant.",
+      "north_star": "Qualified resource interest and useful published demonstrations",
+      "entry_agent": "content-creator",
+      "agents": [
+        "content-creator",
+        "growth-strategist",
+        "instagram-curator",
+        "linkedin-content-creator",
+        "carousel-creator",
+        "email-strategist",
+        "ad-creative-strategist",
+        "brand-guardian",
+        "ai-citation-strategist",
+        "aeo-foundations",
+        "agentic-search-optimizer"
+      ],
+      "skills": [
+        "content-strategy",
+        "content-production",
+        "hook-engineer",
+        "paras-script-auditor",
+        "viral-teardown"
+      ],
+      "runs_on": [
+        "Claude",
+        "Apify",
+        "Canva",
+        "Higgsfield",
+        "Remotion"
+      ]
+    },
+    "business": {
+      "name": "Business OS",
+      "order": 2,
+      "color": "#1A9FD1",
+      "icon": "◆",
+      "promise": "Keep customer commitments visible from first interest through delivery.",
+      "job": "Organize consent, offers, payment/access, community support, delivery and retention.",
+      "north_star": "Active paid members, first-system completion and retention",
+      "entry_agent": "funnel-architect",
+      "agents": [
+        "funnel-architect",
+        "landing-vsl-builder",
+        "lead-scorer-router",
+        "nurture-sequencer",
+        "appointment-setter-ops",
+        "referral-loop-engineer",
+        "offer-leadgen-strategist",
+        "discovery-coach",
+        "deal-strategist",
+        "proposal-strategist",
+        "paid-social-strategist",
+        "paid-media-auditor",
+        "tracking-specialist",
+        "analytics-reporter",
+        "executive-summary-generator",
+        "pipeline-analyst",
+        "pricing-analyst"
+      ],
+      "skills": [
+        "ghl",
+        "n8n-workflow-builder-team",
+        "executive-growth-council",
+        "webinar-marketing"
+      ],
+      "runs_on": [
+        "GoHighLevel",
+        "AiSensy",
+        "n8n",
+        "Meta Ads",
+        "Razorpay"
+      ]
+    },
+    "invest": {
+      "name": "Invest OS",
+      "order": 3,
+      "color": "#4FB286",
+      "icon": "◇",
+      "promise": "Study capital decisions through evidence, written rules and risk analysis.",
+      "job": "Research, portfolio structure, risk sizing and strategy testing — as education and analysis.",
+      "north_star": "decisions made with a written thesis and a defined risk",
+      "entry_agent": "portfolio-analyst",
+      "agents": [
+        "portfolio-analyst",
+        "value-research-analyst",
+        "stock-screener",
+        "chart-analyst",
+        "market-researcher",
+        "pine-script-generator",
+        "pine-code-fixer",
+        "strategy-backtester",
+        "risk-manager",
+        "trading-journal-coach",
+        "investor-educator"
+      ],
+      "skills": [
+        "academic",
+        "deep-research"
+      ],
+      "runs_on": [
+        "Research tools when verified",
+        "TradingView when available",
+        "Separately managed simulation project"
+      ],
+      "product": {
+        "surface": "Exponential AI — trading tools dashboard",
+        "backend": "n8n workflow `Market` (cqeQDoufCB0ddNQB, 41 nodes) — each tool is a webhook-triggered agent",
+        "note": "Historical workflow mapping, not current connection evidence. Funded execution is a separate project and is not activated by this repository.",
+        "tool_map": {
+          "Pine Script Generator": "pine-script-generator",
+          "Pinecode Fixer": "pine-code-fixer",
+          "AI Chart Analysis": "chart-analyst",
+          "Value Investment": "value-research-analyst",
+          "Deep Analysis": "value-research-analyst",
+          "Swing Trading": "stock-screener",
+          "Top 5 Stocks": "stock-screener",
+          "Stock Comparison": "stock-screener",
+          "Portfolio": "portfolio-analyst",
+          "Trading Journal": "trading-journal-coach",
+          "Learning": "investor-educator"
+        },
+        "not_yet_built": [
+          "Intraday Trading",
+          "F&O Trading"
+        ]
+      },
+      "compliance": {
+        "binding": true,
+        "rule": "Education and analysis only. This pillar must never emit a buy/sell signal, a price target, a tip, a projected return, or personalised financial advice — for Paras or for any client this OS is installed for.",
+        "why": "Constitution §4. It also ships to third parties, where advice without a licence is a legal problem, not a tone problem.",
+        "always": [
+          "Frame output as education, method, or analysis of what already happened.",
+          "State the risk before the opportunity.",
+          "Carry an educational disclaimer on anything shown to an end user.",
+          "Say 'I can't advise on that' plainly rather than hedging into a recommendation."
+        ],
+        "never": [
+          "buy / sell / hold calls on a named instrument",
+          "price targets or entry/exit levels presented as recommendations",
+          "expected or historical returns used as a promise",
+          "position sizing framed as instruction rather than arithmetic",
+          "anything that would read as advice to a person who is not a professional"
+        ],
+        "highest_risk_agent": "stock-screener",
+        "regulatory_note": "In India, recommending specific securities to paying subscribers is SEBI Research Analyst activity and requires registration. The stock-oriented tools (Swing Trading, Top 5 Stocks, Stock Comparison) are therefore built as SCREENS — they run the user's own stated criteria, show every match with its data, and argue the case against each — rather than as picks. This keeps the tool useful while the decision stays with the user. Worth a lawyer's read before scaling paid subscriptions."
+      },
+      "status": "separate_research"
+    }
+  },
+  "platform": {
+    "name": "Platform",
+    "note": "Shared memory, planning and technical foundation; not a fourth business pillar.",
+    "conductor": "orchestrator",
+    "executors": [
+      "ghl-operator",
+      "aisensy-operator",
+      "n8n-operator"
+    ],
+    "builders": [
+      "ai-engineer",
+      "backend-architect",
+      "ui-designer",
+      "secrets-credential-engineer",
+      "ai-generated-code-auditor",
+      "test-automation-engineer",
+      "mcp-builder",
+      "workflow-architect",
+      "legal-compliance-checker",
+      "document-generator"
+    ],
+    "surfaces": {
+      "deck": "/ultron/",
+      "mind": "/mind/",
+      "console": "/",
+      "voice": "jarvis/listener.py"
+    },
+    "guardrails": {
+      "compliance": "Education only across every pillar. No income, return or guaranteed-results claims.",
+      "gates": "Publishing, outbound sends, money movement and ad spend stop for explicit human confirmation.",
+      "honesty": "A source that is down is reported as down. Nothing is ever faked to fill a panel."
+    },
+    "memory": {
+      "index": "MEMORY.md",
+      "directory": "memory/",
+      "capture": "scripts/brain.cjs",
+      "obsidian_sync": "scripts/sync-obsidian.cjs"
+    }
+  },
+  "install": {
+    "sellable_as": "Future industry adaptation after repeatable delivery is demonstrated; current business is training plus mentorship",
+    "tiers": [
+      {
+        "id": "content",
+        "name": "Content OS",
+        "for": "creators and personal brands"
+      },
+      {
+        "id": "business",
+        "name": "Business OS",
+        "for": "service businesses with a lead problem"
+      },
+      {
+        "id": "content+business",
+        "name": "Growth OS",
+        "for": "most SMBs — the default"
+      },
+      {
+        "id": "all",
+        "name": "Full OS",
+        "for": "operators who also manage their own capital"
+      }
+    ],
+    "per_client_needs": [
+      "brand profile",
+      "CRM credentials",
+      "channel connections",
+      "compliance vertical"
+    ]
+  }
+}

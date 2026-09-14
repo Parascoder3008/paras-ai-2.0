@@ -1,0 +1,14 @@
+{
+  "_comment": "Template. Copy to .mcp.json and fill in the real key. .mcp.json is gitignored because it holds a live credential.",
+  "mcpServers": {
+    "n8n-mcp": {
+      "command": "npx",
+      "args": ["-y", "n8n-mcp"],
+      "env": {
+        "MCP_MODE": "stdio",
+        "N8N_API_URL": "https://your-n8n-instance.example.com",
+        "N8N_API_KEY": "PASTE_YOUR_N8N_API_KEY_HERE"
+      }
+    }
+  }
+}

@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paras AI 2.0 — Three Systems, One Brain</title>
+<style>
+  :root{
+    --void:#0C0E0F; --navy:#11324C;
+    --content:#3AB0D8; --business:#1A9FD1; --invest:#4FB286; --platform:#8B93A1;
+    --warn:#E0A458;
+    --bg:var(--void); --ink:#FFFFFF; --muted:#8F9AA1; --dim:#5C666D;
+    --panel:rgba(17,50,76,.30); --line:rgba(255,255,255,.09);
+    --sans:Inter,"Segoe UI",system-ui,-apple-system,sans-serif;
+    --mono:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+  }
+  :root[data-theme="light"]{
+    --bg:#F4F6F8; --ink:#0C0E0F; --muted:#4A575F; --dim:#7A868D;
+    --panel:#FFFFFF; --line:rgba(17,50,76,.12);
+    --content:#1B7FA8; --business:#146F92; --invest:#2F7D5A; --platform:#5F6A72;
+  }
+  @media (prefers-color-scheme:light){
+    :root:not([data-theme="dark"]){
+      --bg:#F4F6F8; --ink:#0C0E0F; --muted:#4A575F; --dim:#7A868D;
+      --panel:#FFFFFF; --line:rgba(17,50,76,.12);
+      --content:#1B7FA8; --business:#146F92; --invest:#2F7D5A; --platform:#5F6A72;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+    font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 22px 90px}
+
+  /* ---------- masthead ---------- */
+  header{padding:56px 0 26px}
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--business);margin:0 0 16px}
+  h1{font-size:clamp(30px,5.4vw,50px);line-height:1.04;margin:0 0 14px;font-weight:700;
+    letter-spacing:-.025em;text-wrap:balance}
+  .sub{color:var(--muted);margin:0;max-width:60ch;font-size:17px}
+
+  .totals{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+  .tot{font-family:var(--mono);font-size:11.5px;letter-spacing:.06em;padding:6px 13px;
+    border:1px solid var(--line);border-radius:999px;color:var(--muted)}
+  .tot b{color:var(--ink);font-weight:650}
+
+  /* ---------- controls ---------- */
+  .bar{position:sticky;top:0;z-index:20;display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+    padding:13px 0;margin-bottom:6px;
+    background:color-mix(in srgb,var(--bg) 93%,transparent);backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line)}
+  .filt{font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:8px 15px;
+    border-radius:999px;background:transparent;border:1px solid var(--line);color:var(--muted);
+    transition:.15s}
+  .filt:hover{color:var(--ink)}
+  .filt[aria-pressed="true"]{background:var(--c,var(--business));border-color:var(--c,var(--business));
+    color:var(--bg)}
+  :root[data-theme="light"] .filt[aria-pressed="true"]{color:#fff}
+  .filt:focus-visible{outline:2px solid var(--business);outline-offset:2px}
+  .spacer{flex:1}
+  #q{font:inherit;font-size:13px;padding:8px 15px;border-radius:999px;min-width:170px;
+    background:transparent;border:1px solid var(--line);color:var(--ink);outline:0}
+  #q:focus{border-color:var(--business)}
+  #q::placeholder{color:var(--dim)}
+
+  /* ---------- pillars ---------- */
+  .pillar{margin-top:40px;scroll-margin-top:70px}
+  .pillar[hidden]{display:none}
+  .phead{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;
+    padding-bottom:13px;border-bottom:2px solid var(--c)}
+  .picon{font-size:19px;color:var(--c);line-height:1}
+  .phead h2{font-size:clamp(20px,3vw,27px);margin:0;font-weight:700;letter-spacing:-.015em}
+  .pcount{font-family:var(--mono);font-size:12px;color:var(--c);
+    border:1px solid var(--c);border-radius:999px;padding:2px 10px}
+  .plock{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--warn);border:1px solid var(--warn);border-radius:999px;padding:2px 9px}
+  .ppromise{margin:14px 0 4px;font-size:17px;color:var(--ink);max-width:60ch}
+  .pmeta{margin:0 0 18px;font-family:var(--mono);font-size:11.5px;color:var(--muted)}
+  .pmeta b{color:var(--c)}
+
+  /* ---------- agent grid ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(268px,1fr));gap:11px}
+  .card{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--c);
+    border-radius:13px;padding:14px 16px;cursor:pointer;transition:.15s;text-align:left;
+    font:inherit;color:inherit;width:100%}
+  .card:hover{border-color:var(--c);transform:translateY(-1px)}
+  .card:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+  .card[hidden]{display:none}
+  .cid{font-family:var(--mono);font-size:12.5px;font-weight:600;color:var(--c);
+    display:block;margin-bottom:5px;word-break:break-word}
+  .cdesc{font-size:12.5px;color:var(--muted);line-height:1.5;
+    display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .card.lead .cid::after{content:"LEAD";font-size:8.5px;letter-spacing:.14em;margin-left:7px;
+    padding:1px 6px;border:1px solid var(--c);border-radius:99px;vertical-align:1px}
+
+  /* ---------- detail ---------- */
+  .detail{margin-top:11px;background:var(--panel);border:1px solid var(--c);border-radius:13px;
+    padding:16px 18px;font-size:14px}
+  .detail[hidden]{display:none}
+  .detail .dn{font-family:var(--mono);font-size:13px;color:var(--c);font-weight:600}
+  .detail p{margin:8px 0 0;color:var(--muted);line-height:1.62}
+  .detail .tool{margin-top:10px;font-family:var(--mono);font-size:11px;color:var(--dim)}
+  .detail .tool b{color:var(--muted)}
+
+  /* ---------- compliance ---------- */
+  .compliance{margin-top:16px;border:1px solid var(--warn);border-radius:13px;padding:16px 18px;
+    background:color-mix(in srgb,var(--warn) 9%,transparent);font-size:14px}
+  .compliance .t{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--warn);display:block;margin-bottom:7px}
+  .compliance p{margin:0 0 8px}
+  .compliance p:last-child{margin-bottom:0}
+
+  /* ---------- tiers ---------- */
+  .tiers{margin-top:56px;padding-top:30px;border-top:1px solid var(--line)}
+  .tiers h2{font-size:22px;margin:0 0 6px;font-weight:700;letter-spacing:-.015em}
+  .tiers .lead{color:var(--muted);margin:0 0 20px;max-width:60ch}
+  .tgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:11px}
+  .tier{border:1px solid var(--line);border-radius:13px;padding:16px 17px;background:var(--panel)}
+  .tier.hero{border-color:var(--business);
+    background:color-mix(in srgb,var(--business) 11%,transparent)}
+  .tier .tn{font-size:15px;font-weight:700;margin-bottom:3px}
+  .tier .tp{font-family:var(--mono);font-size:11px;color:var(--muted);margin-bottom:9px}
+  .tier .tf{font-size:12.5px;color:var(--muted);line-height:1.5}
+  .tier .badge{display:inline-block;font-family:var(--mono);font-size:8.5px;letter-spacing:.14em;
+    color:var(--business);border:1px solid var(--business);border-radius:99px;
+    padding:1px 7px;margin-left:7px;vertical-align:2px}
+
+  footer{margin-top:50px;padding-top:20px;border-top:1px solid var(--line);
+    font-family:var(--mono);font-size:11px;color:var(--dim);line-height:1.8}
+
+  @media (max-width:560px){
+    .wrap{padding:0 16px 60px}
+    .grid{grid-template-columns:1fr}
+    header{padding-top:36px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <p class="eyebrow">Exponential World AI</p>
+  <h1>Three operating systems, one brain.</h1>
+  <p class="sub">Content creates. Business converts. Invest analyses. Each is sellable on its own; together they run the parts of a company its owner shouldn't be doing by hand.</p>
+  <div class="totals">
+    <span class="tot"><b>39</b> agents</span>
+    <span class="tot"><b>3</b> pillars + platform</span>
+    <span class="tot">north star · <b>captured contacts → booked calls</b></span>
+  </div>
+</header>
+
+<nav class="bar" aria-label="Filter">
+  <button class="filt" data-f="all" aria-pressed="true">All</button>
+  <button class="filt" data-f="content" style="--c:var(--content)" aria-pressed="false">◈ Content</button>
+  <button class="filt" data-f="business" style="--c:var(--business)" aria-pressed="false">◆ Business</button>
+  <button class="filt" data-f="invest" style="--c:var(--invest)" aria-pressed="false">◇ Invest</button>
+  <button class="filt" data-f="platform" style="--c:var(--platform)" aria-pressed="false">⬡ Platform</button>
+  <span class="spacer"></span>
+  <input id="q" type="search" placeholder="Filter agents…" aria-label="Filter agents by name">
+</nav>
+
+<main id="pillars"></main>
+
+<section class="tiers">
+  <h2>How it sells</h2>
+  <p class="lead">The pillars aren't just organisation — they're the product tiers. A creator doesn't need a CRM; a plumber doesn't need a backtester.</p>
+  <div class="tgrid">
+    <div class="tier"><div class="tn">Content OS</div><div class="tp">◈ 8 agents</div>
+      <div class="tf">Creators and personal brands. One idea becomes a week of native content.</div></div>
+    <div class="tier"><div class="tn">Business OS</div><div class="tp">◆ 13 agents</div>
+      <div class="tf">Service businesses with a lead problem. Capture through to referral.</div></div>
+    <div class="tier hero"><div class="tn">Growth OS<span class="badge">DEFAULT</span></div><div class="tp">◈ + ◆ · 21 agents</div>
+      <div class="tf">Most SMBs. Content feeds the funnel, the funnel converts it.</div></div>
+    <div class="tier"><div class="tn">Full OS</div><div class="tp">◈ + ◆ + ◇ · 32 agents</div>
+      <div class="tf">Operators who also manage their own capital.</div></div>
+  </div>
+</section>
+
+<footer>
+  Source of truth · <b>ai-os/os-manifest.json</b> — the dashboard, /api/os and the clone kit all read it<br>
+  Guardrails · education only, no income or guaranteed-results claims · publishing, sends, money and ad spend stop for human confirmation · a source that is down is reported as down, never faked
+</footer>
+</div>
+
+<script>
+const DATA = {
+  content: {
+    name: "Content OS", icon: "◈", color: "var(--content)",
+    promise: "Create once. Publish everywhere. Never invent the same idea twice.",
+    north: "assets published per idea",
+    runs: "Claude · Apify · Canva · Higgsfield · Remotion",
+    lead: "content-creator",
+    agents: [
+      ["content-creator","The content brain. Plans the calendar and creates the master asset once; platform agents repurpose it natively."],
+      ["growth-strategist","Organic growth loops, lead magnets, referral mechanics and A/B tests — education-led, no income-claim hooks."],
+      ["instagram-curator","Reels scripts and hooks, carousels, captions, story sequences — native IG, not a cross-post."],
+      ["linkedin-content-creator","The hero platform. Credible long-form posts and document carousels; value native, link in the comment."],
+      ["carousel-creator","Turns one idea into a high-retention educational swipe for IG and LinkedIn."],
+      ["email-strategist","Nurture and broadcast sequences — welcome, webinar reminders, replay, no-show recovery, retention."],
+      ["ad-creative-strategist","Ad concepts, hooks and angle variations for Meta. Education-only hooks; spend stays human."],
+      ["brand-guardian","Voice and visual consistency, working alongside the compliance gate. Reviews before anything publishes."]
+    ]
+  },
+  business: {
+    name: "Business OS", icon: "◆", color: "var(--business)",
+    promise: "A lead never goes cold because someone forgot.",
+    north: "captured contacts converted to booked calls",
+    runs: "GoHighLevel · AiSensy · n8n · Meta Ads · Razorpay",
+    lead: "funnel-architect",
+    agents: [
+      ["funnel-architect","Department lead. The universal lead-to-deal funnel: sources → capture → scoring → routing → nurture → close → re-referral."],
+      ["landing-vsl-builder","The convergence point every source lands on. Landing pages, VSL structure, capture forms."],
+      ["lead-scorer-router","The CRM brain. Five-signal qualification, auto-scoring, tagging, HOT/WARM/COLD routing."],
+      ["nurture-sequencer","Lane-specific WhatsApp and email flows, plus webinar reminders and no-show recovery."],
+      ["appointment-setter-ops","Everything between 'lead is ready' and 'lead showed up' — calendars, reminders, no-show recovery."],
+      ["referral-loop-engineer","Conversion aftermath: onboarding to advocacy, testimonials, referral mechanics back into the funnel."],
+      ["offer-leadgen-strategist","The DFY offer ladder and the 'raise hand' mechanics that surface high-ticket buyers from inside communities."],
+      ["discovery-coach","Qualification frameworks and call prep for high-ticket conversations. Honest, education-led selling."],
+      ["deal-strategist","Maps stakeholders, objections, scope and next best action to move deals forward without pressure."],
+      ["proposal-strategist","Scoped, compliant proposals — deliverables, timeline, pricing, terms."],
+      ["paid-social-strategist","Full-funnel Meta programmes. Plans and analyses only; launching and spend stay with a human."],
+      ["paid-media-auditor","Reviews ad accounts for waste, structure and tracking gaps. Read-only — never changes spend."],
+      ["tracking-specialist","Pixel/CAPI, event mapping and attribution, so the funnel's numbers can be trusted."]
+    ]
+  },
+  invest: {
+    name: "Invest OS", icon: "◇", color: "var(--invest)",
+    promise: "Understand your own portfolio better than the person selling to you.",
+    north: "decisions made with a written thesis and a defined risk",
+    runs: "TradingView · n8n (Market workflow) · Perplexity · Claude",
+    lead: "portfolio-analyst",
+    locked: true,
+    agents: [
+      ["portfolio-analyst","Concentration, hidden overlap, correlation clustering and allocation drift — what the owner can't see.","Portfolio"],
+      ["value-research-analyst","Long-form macro and sector research, with the bear case given real weight and a 'what would change this view' section.","Value Investment · Deep Analysis"],
+      ["stock-screener","Runs the user's own criteria and shows every match with the case against each. A screen, not a pick.","Swing Trading · Top 5 · Comparison"],
+      ["chart-analyst","Describes what is objectively on the chart, gives both readings with their falsifiers, never calls direction.","AI Chart Analysis"],
+      ["market-researcher","What happened and why, sourced. Surfaces disagreement rather than resolving it into one confident narrative.","—"],
+      ["pine-script-generator","Skeleton first, then code — because a vague brief yields a script that invents rules and still compiles.","Pine Script Generator"],
+      ["pine-code-fixer","Names the cause, fixes minimally, and flags when a repaint fix invalidates a prior backtest.","Pinecode Fixer"],
+      ["strategy-backtester","Reports worst-first, and assumes look-ahead bias until disproved. Killing a bad strategy is a successful outcome.","—"],
+      ["risk-manager","Position-sizing arithmetic and drawdown maths as method the owner applies — never as an instruction.","—"],
+      ["trading-journal-coach","What they actually do versus what they say they do. The most defensible agent here, and usually the most valuable.","Trading Journal"],
+      ["investor-educator","Teaches the unglamorous parts — sizing, drawdown, costs, psychology. Bridges into Content OS.","Learning"]
+    ]
+  },
+  platform: {
+    name: "Platform", icon: "⬡", color: "var(--platform)",
+    promise: "Not a pillar — the substrate all three run on, cloned with every install.",
+    north: "—",
+    runs: "deck /ultron/ · living mind /mind/ · voice listener",
+    lead: "orchestrator",
+    agents: [
+      ["orchestrator","The single point of contact. Plans, routes across pillars, enforces compliance and approval gates, reports back."],
+      ["ghl-operator","Acts in GoHighLevel — tags, calendars, opportunities, audits. Executors act; designers design."],
+      ["aisensy-operator","Fires WhatsApp sends via the verified API, test-to-Paras-first. Sends stay approval-gated."],
+      ["n8n-operator","Builds, validates and activates the workflows that run the deterministic, repeating work."],
+      ["ai-engineer","Designs and specs AI features — assistants, agents, lead-qualification bots — for the OS and for clients."],
+      ["backend-architect","APIs, data models and integration architecture for the OS and DFY builds."],
+      ["ui-designer","Landing pages, funnels and web UI for the verticals and client sites."]
+    ]
+  }
+};
+
+const ORDER = ["content","business","invest","platform"];
+const host = document.getElementById("pillars");
+
+for (const key of ORDER) {
+  const p = DATA[key];
+  const sec = document.createElement("section");
+  sec.className = "pillar";
+  sec.dataset.pillar = key;
+  sec.style.setProperty("--c", p.color);
+
+  const head = document.createElement("div");
+  head.className = "phead";
+  head.innerHTML = `<span class="picon">${p.icon}</span>`;
+  const h2 = document.createElement("h2"); h2.textContent = p.name;
+  const cnt = document.createElement("span"); cnt.className = "pcount"; cnt.textContent = p.agents.length;
+  head.append(h2, cnt);
+  if (p.locked) {
+    const l = document.createElement("span"); l.className = "plock";
+    l.textContent = "education only";
+    head.append(l);
+  }
+  sec.append(head);
+
+  const pr = document.createElement("p"); pr.className = "ppromise"; pr.textContent = p.promise;
+  const mt = document.createElement("p"); mt.className = "pmeta";
+  mt.innerHTML = `north star <b>${p.north}</b> &nbsp;·&nbsp; runs on ${p.runs}`;
+  sec.append(pr, mt);
+
+  if (p.locked) {
+    const c = document.createElement("div");
+    c.className = "compliance";
+    c.innerHTML = `<span class="t">Why this pillar is built differently</span>
+      <p>Recommending specific securities to paying subscribers is <b>SEBI Research Analyst activity</b> in India — a licensing question, not a wording one. And this ships to third parties when the OS is installed for a client.</p>
+      <p>So the stock-facing tools are built as <b>screens, not picks</b>: they run the user's own stated criteria, show every match with its data, and argue the case against each. The tool keeps its usefulness; the decision stays with the user. Refusing a “what should I buy” cleanly is a correct output.</p>`;
+    sec.append(c);
+  }
+
+  const grid = document.createElement("div");
+  grid.className = "grid";
+  const detail = document.createElement("div");
+  detail.className = "detail";
+  detail.hidden = true;
+
+  for (const [id, desc, tool] of p.agents) {
+    const b = document.createElement("button");
+    b.className = "card" + (id === p.lead ? " lead" : "");
+    b.dataset.id = id;
+    b.setAttribute("aria-expanded", "false");
+    const s = document.createElement("span"); s.className = "cid"; s.textContent = id;
+    const d = document.createElement("span"); d.className = "cdesc"; d.textContent = desc;
+    b.append(s, d);
+    b.addEventListener("click", () => {
+      const open = detail.dataset.open === id;
+      grid.querySelectorAll(".card").forEach((c) => c.setAttribute("aria-expanded", "false"));
+      if (open) { detail.hidden = true; detail.dataset.open = ""; return; }
+      detail.replaceChildren();
+      const n = document.createElement("div"); n.className = "dn"; n.textContent = id;
+      const t = document.createElement("p"); t.textContent = desc;
+      detail.append(n, t);
+      if (tool && tool !== "—") {
+        const tl = document.createElement("div"); tl.className = "tool";
+        tl.innerHTML = `live tool · <b>${tool}</b> — n8n <code>Market</code> workflow`;
+        detail.append(tl);
+      }
+      detail.hidden = false;
+      detail.dataset.open = id;
+      b.setAttribute("aria-expanded", "true");
+    });
+    grid.append(b);
+  }
+  sec.append(grid, detail);
+  host.append(sec);
+}
+
+/* filter chips */
+const chips = [...document.querySelectorAll(".filt")];
+chips.forEach((c) => c.addEventListener("click", () => {
+  chips.forEach((x) => x.setAttribute("aria-pressed", String(x === c)));
+  const f = c.dataset.f;
+  document.querySelectorAll(".pillar").forEach((s) => {
+    s.hidden = f !== "all" && s.dataset.pillar !== f;
+  });
+}));
+
+/* text filter — hides cards, and any pillar left with none */
+document.getElementById("q").addEventListener("input", (e) => {
+  const q = e.target.value.trim().toLowerCase();
+  document.querySelectorAll(".pillar").forEach((s) => {
+    let shown = 0;
+    s.querySelectorAll(".card").forEach((c) => {
+      const hit = !q || c.textContent.toLowerCase().includes(q);
+      c.hidden = !hit;
+      if (hit) shown++;
+    });
+    const active = chips.find((x) => x.getAttribute("aria-pressed") === "true").dataset.f;
+    const inFilter = active === "all" || s.dataset.pillar === active;
+    s.hidden = !inFilter || shown === 0;
+  });
+});
+</script>
+
+</html>

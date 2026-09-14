@@ -1,0 +1,14 @@
+# Jarvis voice listener — pip install -r requirements.txt
+
+# Not installed yet on Paras's machine:
+sounddevice>=0.4.6        # mic capture + playback (bundles PortAudio; needs cffi)
+elevenlabs>=1.0           # OPTIONAL — without it, replies print instead of speaking
+
+# Already installed here; listed so a fresh machine works:
+openai-whisper>=20231117  # local speech-to-text, nothing leaves the machine
+numpy>=1.24
+
+# Also required, already installed: ffmpeg on PATH (only used as the mp3 fallback
+# for TTS playback — Whisper is fed numpy arrays directly, so it never shells out).
+# Whisper models: 'small' is already downloaded; 'tiny' (~75 MB) auto-downloads
+# on the first run.

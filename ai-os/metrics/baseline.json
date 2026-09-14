@@ -1,0 +1,70 @@
+{
+  "as_of": "2026-09-13",
+  "source_note": "Read-only browser inspection; public Instagram and authenticated YouTube/Skool. No payment or CRM synchronization.",
+  "youtube": {
+    "subscribers": 27070,
+    "period_start": "2026-08-16",
+    "period_end": "2026-09-12",
+    "views": 20580,
+    "watch_hours": 158.5,
+    "net_subscribers": 211,
+    "shorts_views": 18174,
+    "shorts_engaged_views": 10332,
+    "shorts_stayed_percent": 67,
+    "caveat": "Studio reports temporary views data issue and a counting change from Aug 27.",
+    "long_form": {
+      "views": 2434,
+      "typical_views_range": [
+        1100,
+        2000
+      ],
+      "impressions": 24356,
+      "thumbnail_ctr_percent": 2.8,
+      "average_view_duration_seconds": 164,
+      "browse_traffic_percent": 45.7
+    }
+  },
+  "instagram": {
+    "followers": 3054,
+    "posts": 122,
+    "private_insights": null,
+    "source": "Public profile supplied by user"
+  },
+  "skool": {
+    "members": 411,
+    "status": "archived",
+    "pending_requests": 4,
+    "reported_posts": 2,
+    "paid_status": "User reports free community"
+  },
+  "active_paid_members": {
+    "value": null,
+    "status": "unknown",
+    "source": null
+  },
+  "whatsapp_identified_opt_ins": {
+    "value": null,
+    "status": "unknown"
+  },
+  "cash_collected_inr": {
+    "value": null,
+    "status": "unknown"
+  },
+  "monthly_cost_budget_inr": {
+    "value": 200000,
+    "status": "user_reported_budget_not_actual"
+  },
+  "client_proof": {
+    "status": "user_reported",
+    "industries": [
+      "real estate",
+      "travel",
+      "consulting",
+      "training",
+      "coaching",
+      "content creators"
+    ],
+    "artifact_evidence": null,
+    "client_publication_permission": null
+  }
+}

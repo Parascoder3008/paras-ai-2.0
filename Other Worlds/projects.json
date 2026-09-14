@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "updated": "2026-09-14",
+  "source": "Paras's direct instruction in this conversation",
+  "default_priority": "secondary_to_main_business",
+  "projects": [
+    {"id":"astrology","name":"Astrology","status":"user_reported_previous_work","location":null,"next_action":"Identify existing source when this project is next requested"},
+    {"id":"trading-bots","name":"Trading Bots","status":"separate_project","location":"Original AIOS workspace: paper-trader/","next_action":"Audit that project's current state when requested; do not move or activate it"},
+    {"id":"listing-software","name":"Listing Software","status":"user_reported","location":null,"next_action":"Identify scope and existing source when requested"},
+    {"id":"apps","name":"Apps","status":"user_reported","location":null,"next_action":"Register individual applications and their repositories when identified"}
+  ]
+}

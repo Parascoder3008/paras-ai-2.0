@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paras AI 2.0 — Command Deck</title>
+<style>
+  :root{
+    --void:#05070B; --panel:rgba(10,16,22,.72); --line:rgba(26,159,209,.22);
+    --line-hot:rgba(26,159,209,.55);
+    --ink:#EAF3F7; --muted:#7d8a93;
+    --accent:#1A9FD1; --accent-2:#3AB0D8;
+    --ok:#3ddc97; --warn:#ffc53d; --err:#ff6259;
+    --f:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+    --m:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--void);color:var(--ink);
+    font-family:var(--f);overflow:hidden}
+
+  /* ambient reactor wash + scanline grid — the room the HUD sits in */
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(60vw 60vw at 50% 42%, color-mix(in srgb,var(--accent) 13%,transparent), transparent 62%),
+      repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.014) 3px 4px);}
+
+  /* ---------- boot sequence ---------- */
+  #boot{position:fixed;inset:0;z-index:100;background:var(--void);
+    display:grid;place-items:center;transition:opacity .7s ease}
+  #boot.done{opacity:0;pointer-events:none}
+  .reactor{width:210px;height:210px;position:relative;display:grid;place-items:center}
+  .reactor i{position:absolute;border-radius:50%;border:1px solid var(--line-hot);
+    animation:spin 3.6s linear infinite}
+  .reactor i:nth-child(1){inset:0;border-top-color:var(--accent-2);border-right-color:transparent}
+  .reactor i:nth-child(2){inset:22px;border-bottom-color:var(--accent-2);border-left-color:transparent;
+    animation-duration:2.4s;animation-direction:reverse}
+  .reactor i:nth-child(3){inset:46px;border-top-color:transparent;border-left-color:var(--accent);
+    animation-duration:5s}
+  .reactor b{width:74px;height:74px;border-radius:50%;background:radial-gradient(circle,#fff 0%,var(--accent-2) 45%,transparent 72%);
+    box-shadow:0 0 60px 12px color-mix(in srgb,var(--accent) 55%,transparent);
+    animation:thump 1.9s ease-in-out infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @keyframes thump{0%,100%{transform:scale(1);opacity:.92}50%{transform:scale(1.09);opacity:1}}
+  #boot-log{position:absolute;bottom:16%;left:50%;transform:translateX(-50%);
+    font-family:var(--m);font-size:11.5px;color:var(--muted);letter-spacing:.08em;
+    text-align:left;min-width:340px}
+  #boot-log div{opacity:0;animation:fade .35s forwards}
+  #boot-log .ok{color:var(--ok)}
+  #boot-log .no{color:var(--err)}
+  @keyframes fade{to{opacity:1}}
+  #boot-name{position:absolute;top:15%;left:50%;transform:translateX(-50%);
+    font-size:clamp(28px,6vw,54px);font-weight:800;letter-spacing:.34em;
+    color:var(--accent-2);text-shadow:0 0 36px color-mix(in srgb,var(--accent) 60%,transparent)}
+  #boot-tag{position:absolute;top:calc(15% + 62px);left:50%;transform:translateX(-50%);
+    font-family:var(--m);font-size:11px;letter-spacing:.2em;color:var(--muted)}
+
+  /* ---------- deck ---------- */
+  #deck{position:relative;z-index:1;height:100%;display:grid;
+    grid-template-columns:270px 1fr 300px;grid-template-rows:52px 1fr 118px;gap:12px;padding:12px}
+  @media(max-width:1100px){#deck{grid-template-columns:1fr;grid-template-rows:52px 1fr auto auto}
+    .col-l,.col-r{max-height:210px}}
+
+  .bar{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:0 16px;
+    background:var(--panel);border:1px solid var(--line);border-radius:14px;backdrop-filter:blur(9px)}
+  .brand{font-weight:800;letter-spacing:.28em;font-size:13px;color:var(--accent-2)}
+  .bar .sep{flex:1}
+  .pill{font-family:var(--m);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+    border:1px solid var(--line);border-radius:99px;padding:4px 10px;color:var(--muted);cursor:pointer;
+    background:transparent}
+  .pill[aria-pressed="true"]{color:var(--void);background:var(--accent);border-color:var(--accent)}
+  .dot{width:7px;height:7px;border-radius:50%;background:#39424a;display:inline-block;margin-right:6px}
+  .dot.live{background:var(--ok);box-shadow:0 0 9px var(--ok)}
+  .dot.wait{background:var(--warn)}
+  .dot.down{background:var(--err)}
+  .stat{font-family:var(--m);font-size:10.5px;color:var(--muted);letter-spacing:.08em}
+
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:16px;
+    backdrop-filter:blur(9px);padding:13px 15px;overflow:auto;position:relative}
+  .panel h3{margin:0 0 10px;font-family:var(--m);font-size:9.5px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--accent-2);font-weight:600}
+  /* HUD corner ticks */
+  .panel::before,.panel::after{content:"";position:absolute;width:14px;height:14px;
+    border:1px solid var(--line-hot);pointer-events:none}
+  .panel::before{left:7px;top:7px;border-right:0;border-bottom:0;border-radius:5px 0 0 0}
+  .panel::after{right:7px;bottom:7px;border-left:0;border-top:0;border-radius:0 0 5px 0}
+
+  /* pillar grouping — three operating systems, not one flat list */
+  .pillar-head{display:flex;align-items:center;justify-content:space-between;gap:8px;
+    margin:14px 0 4px;padding:5px 8px;border-left:2px solid var(--c);
+    background:linear-gradient(90deg,color-mix(in srgb,var(--c) 14%,transparent),transparent)}
+  .pillar-head:first-child{margin-top:0}
+  .pillar-head .pt{font-family:var(--m);font-size:10px;letter-spacing:.16em;
+    text-transform:uppercase;color:var(--c);font-weight:600}
+  .pillar-head .pn{font-family:var(--m);font-size:10px;color:var(--muted)}
+  .pillar-lock{font-family:var(--m);font-size:8.5px;letter-spacing:.1em;text-transform:uppercase;
+    color:var(--warn);padding:0 0 5px 10px;opacity:.85}
+
+  .agent{display:flex;align-items:center;gap:8px;padding:6px 0 6px 10px;font-size:12px;
+    border-bottom:1px solid rgba(255,255,255,.05);cursor:default}
+  .agent:last-child{border-bottom:0}
+  .agent .nm{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .agent.hot{color:var(--accent-2)}
+  .agent.hot .dot{background:var(--accent-2);box-shadow:0 0 10px var(--accent-2)}
+
+  .run{font-size:11.5px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05)}
+  .run:last-child{border-bottom:0}
+  .run .w{font-family:var(--m);font-size:9.5px;color:var(--muted);letter-spacing:.08em}
+  .run .a{color:var(--accent-2);font-weight:600}
+  .run .s{color:var(--muted)}
+  .run.error .a{color:var(--err)}
+
+  /* centre: the mind, live */
+  .stage{padding:0;overflow:hidden;display:flex;flex-direction:column}
+  .stage iframe{flex:1;width:100%;border:0;background:var(--void)}
+  .stage .cap{padding:9px 14px;font-family:var(--m);font-size:9.5px;letter-spacing:.2em;
+    text-transform:uppercase;color:var(--accent-2);border-bottom:1px solid var(--line)}
+
+  /* bottom: voice + command */
+  .io{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .line .lbl{font-family:var(--m);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+  .line .tx{font-size:14px;margin-top:5px;min-height:1.4em;line-height:1.45}
+  .line.you .tx{color:var(--accent-2)}
+  #ask{display:flex;gap:8px;margin-top:9px}
+  #ask input{flex:1;min-width:0;background:rgba(255,255,255,.045);color:var(--ink);
+    border:1px solid var(--line);border-left:2px solid var(--accent);border-radius:0 12px 12px 0;
+    padding:10px 13px;font-family:inherit;font-size:13px;outline:0}
+  #ask input:focus{border-color:var(--line-hot);border-left-color:var(--accent-2)}
+  #ask button{background:var(--accent);color:var(--void);border:0;border-radius:10px;
+    padding:9px 18px;font-family:var(--m);font-size:10.5px;font-weight:700;letter-spacing:.12em;cursor:pointer}
+  #ask button:hover{background:var(--accent-2)}
+  #ask button[disabled]{opacity:.4;cursor:not-allowed}
+
+  /* approval gate — §5 has no bypass, voice or typed */
+  #gate{position:fixed;left:50%;top:22px;transform:translateX(-50%);z-index:60;
+    width:min(560px,92vw);background:rgba(14,10,4,.95);border:1px solid var(--warn);
+    border-radius:16px;padding:16px 18px;display:none;backdrop-filter:blur(10px);
+    box-shadow:0 0 50px rgba(255,197,61,.2)}
+  #gate.on{display:block}
+  #gate .h{font-family:var(--m);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--warn);margin-bottom:7px}
+  #gate .act{font-size:14.5px;margin-bottom:4px}
+  #gate .why{font-size:11.5px;color:var(--muted);margin-bottom:12px}
+  #gate .row{display:flex;align-items:center;gap:10px}
+  #gate .cd{font-family:var(--m);font-size:19px;color:var(--warn);min-width:38px}
+  #gate .meter{flex:1;height:3px;background:rgba(255,255,255,.1);border-radius:9px;overflow:hidden}
+  #gate .meter i{display:block;height:100%;background:var(--warn);width:100%}
+  .bY{background:var(--warn);color:#231a00;border:0;border-radius:10px;padding:9px 20px;
+    font-family:var(--m);font-size:11px;font-weight:700;letter-spacing:.1em;cursor:pointer}
+  .bN{background:transparent;color:var(--muted);border:1px solid var(--line);border-radius:10px;
+    padding:9px 16px;font-family:var(--m);font-size:11px;cursor:pointer}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<div id="boot">
+  <div id="boot-name">—</div>
+  <div id="boot-tag"></div>
+  <div class="reactor"><i></i><i></i><i></i><b></b></div>
+  <div id="boot-log"></div>
+</div>
+
+<div id="deck">
+  <header class="bar">
+    <span class="brand" id="brand">Paras AI 2.0</span>
+    <span class="stat"><span class="dot" id="d-sse"></span><span id="t-sse">stream</span></span>
+    <span class="stat"><span class="dot" id="d-lis"></span><span id="t-lis">listener</span></span>
+    <span class="stat" id="t-mind">mind —</span>
+    <span class="sep"></span>
+    <span class="stat">PERSONA</span>
+    <button class="pill" data-p="ultron">Ultron</button>
+    <button class="pill" data-p="jarvis">Jarvis</button>
+    <button class="pill" data-p="friday">Friday</button>
+    <a class="pill" href="/os/" target="_blank" style="text-decoration:none">OS MAP ↗</a>
+    <a class="pill" href="/mind/" target="_blank" style="text-decoration:none">MIND ↗</a>
+  </header>
+
+  <section class="panel col-l">
+    <h3>Agents <span id="agent-count" style="color:var(--muted)"></span></h3>
+    <div id="agents"></div>
+  </section>
+
+  <section class="panel stage">
+    <div class="cap">Living Mind — real-time</div>
+    <iframe id="mind" src="/mind/" title="Living Mind" loading="lazy"></iframe>
+  </section>
+
+  <section class="panel col-r">
+    <!-- Today: what the scheduled routines last wrote. The deck used to show only
+         what was RUNNING, so a routine going dark had no symptom anywhere — pulse
+         stopped for 19 days and nothing on any screen said so. -->
+    <h3>Today <span id="routine-count" style="color:var(--muted)"></span></h3>
+    <div id="routines"></div>
+    <h3 style="margin-top:14px">Task feed</h3>
+    <div id="runs"></div>
+  </section>
+
+  <section class="io">
+    <div class="panel">
+      <div class="line you"><div class="lbl">You said</div>
+        <div class="tx" id="you">clap twice, say “jarvis”, or type below</div></div>
+      <form id="ask" autocomplete="off">
+        <input id="askbox" maxlength="500" aria-label="Command"
+               placeholder="Speak freely — it routes to a real agent, gated before it runs.">
+        <button id="asksend" type="submit">SEND</button>
+      </form>
+    </div>
+    <div class="panel">
+      <div class="line"><div class="lbl" id="jar-name">Jarvis</div>
+        <div class="tx" id="jar" aria-live="polite">standing by</div></div>
+    </div>
+  </section>
+</div>
+
+<div id="gate" role="alertdialog" aria-live="assertive">
+  <div class="h">Approval required — nothing has been executed</div>
+  <div class="act" id="g-act">—</div>
+  <div class="why">Gated action. It runs only if you confirm — by voice, or with the button.</div>
+  <div class="row">
+    <div class="cd"><span id="g-secs">20</span>s</div>
+    <div class="meter"><i id="g-bar"></i></div>
+    <button class="bY" id="g-yes">CONFIRM</button>
+    <button class="bN" id="g-no">CANCEL</button>
+  </div>
+</div>
+
+<script type="module" src="./deck.js"></script>
+</body>
+</html>

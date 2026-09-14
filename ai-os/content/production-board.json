@@ -1,0 +1,438 @@
+{
+  "as_of": "2026-09-13",
+  "schedule_status": "internal provisional slots; no external scheduling",
+  "items": [
+    {
+      "id": "os01",
+      "kind": "youtube",
+      "publish_date": "2026-09-15",
+      "title": "AI Employee Banane Se Pehle: Apne Business Ka Ek Task Map Karo",
+      "owner": "Abhav",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/01-task-to-system.md",
+      "evidence": [
+        "ai-os/content/sprint-2026-09/01-task-to-system.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "os02",
+      "kind": "youtube",
+      "publish_date": "2026-09-18",
+      "title": "AI Ko Business Context Kaise Dein: Mere OS Ka Practical Walkthrough",
+      "owner": "Abhav",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/02-business-context.md",
+      "evidence": [
+        "ai-os/content/sprint-2026-09/02-business-context.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "os03",
+      "kind": "youtube",
+      "publish_date": "2026-09-22",
+      "title": "Lead Follow-up System: Draft Se Human Approval Tak",
+      "owner": "Abhav",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/03-follow-up-outline.md",
+      "evidence": [
+        "ai-os/content/sprint-2026-09/03-follow-up-outline.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "os04",
+      "kind": "youtube",
+      "publish_date": "2026-09-25",
+      "title": "Ek Recording Se Useful Shorts Aur Business Insights",
+      "owner": "Abhav",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/04-repurpose-outline.md",
+      "evidence": [
+        "ai-os/content/sprint-2026-09/04-repurpose-outline.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-01",
+      "kind": "short",
+      "publish_date": "2026-09-14",
+      "title": "Ek task choose karo, poora business nahi",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-02",
+      "kind": "short",
+      "publish_date": "2026-09-15",
+      "title": "AI brief mein input aur output likho",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-03",
+      "kind": "short",
+      "publish_date": "2026-09-16",
+      "title": "Agent aur automation ka farq",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-04",
+      "kind": "short",
+      "publish_date": "2026-09-17",
+      "title": "Context file ka useful structure",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-05",
+      "kind": "short",
+      "publish_date": "2026-09-18",
+      "title": "AI ko kya nahi karna chahiye",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-06",
+      "kind": "short",
+      "publish_date": "2026-09-19",
+      "title": "Demo aur client result alag hain",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-07",
+      "kind": "short",
+      "publish_date": "2026-09-20",
+      "title": "Is hafte kya fail hua",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-08",
+      "kind": "short",
+      "publish_date": "2026-09-21",
+      "title": "Lead aaya, next step kis ka hai",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-09",
+      "kind": "short",
+      "publish_date": "2026-09-22",
+      "title": "Draft ready ka matlab sent nahi",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-10",
+      "kind": "short",
+      "publish_date": "2026-09-23",
+      "title": "Follow-up mein consent field",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-11",
+      "kind": "short",
+      "publish_date": "2026-09-24",
+      "title": "Raw recording se ek useful lesson",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-12",
+      "kind": "short",
+      "publish_date": "2026-09-25",
+      "title": "LinkedIn insight aur transcript alag hain",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-13",
+      "kind": "short",
+      "publish_date": "2026-09-26",
+      "title": "Resource link khud click karke dekho",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    },
+    {
+      "id": "short-14",
+      "kind": "short",
+      "publish_date": "2026-09-27",
+      "title": "System bana? Test cases dikhao",
+      "owner": "Devan",
+      "coordinator": "Redima",
+      "status": "briefed",
+      "package": "ai-os/content/sprint-2026-09/shorts-14-days.md",
+      "evidence": [
+        "ai-os/CURRENT-PLAN.md"
+      ],
+      "claims_reviewed": false,
+      "rights_cleared": false,
+      "approval": null,
+      "cta": {
+        "url": null,
+        "tested_on": null,
+        "tested_by": null,
+        "delivery_verified": false
+      },
+      "final_asset": null,
+      "published_url": null
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "updated": "2026-09-14",
+  "projects": [
+    {
+      "id": "paras-ai-2.0",
+      "name": "Paras AI 2.0",
+      "status": "active",
+      "purpose": "Personal second brain and shared operating foundation",
+      "source": "ai-os/VISION.md"
+    },
+    {
+      "id": "entrepreneurs-membership",
+      "name": "Course plus mentorship",
+      "status": "primary_business",
+      "purpose": "200 active paid members in 90 days; teach a first working business system",
+      "source": "ai-os/CURRENT-PLAN.md"
+    },
+    {
+      "id": "existing-client-commitments",
+      "name": "Existing client commitments",
+      "status": "maintenance",
+      "purpose": "Honor promises already made; individual commitments are not supplied in the current task",
+      "source": "ai-os/CURRENT-PLAN.md"
+    },
+    {
+      "id": "invest-os",
+      "name": "Invest OS / Money OS",
+      "status": "separate_research",
+      "purpose": "Research, education and simulation; no funded execution authorized",
+      "source": "ai-os/VISION.md"
+    },
+    {
+      "id": "other-worlds",
+      "name": "Other Worlds",
+      "status": "secondary_project_index",
+      "purpose": "Astrology, trading bots, listing software, apps and other projects; main business remains primary",
+      "source": "Other Worlds/projects.json"
+    }
+  ]
+}

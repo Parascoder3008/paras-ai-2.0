@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paras AI 2.0 — Living Mind</title>
+<style>
+  :root{
+    --bg:#05070B; --ink:#FFFFFF; --muted:#8a9298;
+    --accent:#1A9FD1; --accent-2:#3AB0D8;
+    --f:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+    --m:ui-monospace,"Cascadia Mono",Consolas,"SF Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;background:var(--bg);color:var(--ink);
+    font-family:var(--f);overflow:hidden;transition:background .4s}
+  #view{position:fixed;inset:0;display:block}
+  /* CSS2D label layer — pointer-events off so orbiting never fights the DOM */
+  #labels{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+
+  /* HUD corner ticks — the same targeting-reticle language as the deck's panels,
+     so this page reads as part of one system rather than a separate three.js demo */
+  .hudframe{position:relative}
+  .hudframe::before,.hudframe::after{content:"";position:absolute;width:12px;height:12px;
+    border:1px solid color-mix(in srgb,var(--accent) 55%,transparent);pointer-events:none;
+    transition:border-color .4s}
+  .hudframe::before{left:-8px;top:-8px;border-right:0;border-bottom:0}
+  .hudframe::after{right:-8px;bottom:-8px;border-left:0;border-top:0}
+
+  #hud{position:fixed;left:22px;top:20px;z-index:10;user-select:none}
+  #hud .t{font-family:var(--m);font-size:13px;font-weight:700;letter-spacing:.22em;
+    color:var(--accent-2);transition:color .4s}
+  #hud .s{font-family:var(--m);font-size:10.5px;color:var(--muted);margin-top:5px;letter-spacing:.06em}
+
+  #stats{position:fixed;left:22px;bottom:20px;z-index:10;font-family:var(--m);font-size:10.5px;
+    color:var(--muted);letter-spacing:.05em;user-select:none}
+  #stats.err{color:#ff6259}
+
+  /* labels */
+  .lbl-region{font-size:10px;font-weight:700;letter-spacing:.3em;opacity:.75}
+  .lbl-core{font-size:11px;font-weight:700;letter-spacing:.24em;color:var(--accent-2)}
+
+  /* tooltip */
+  #tooltip{position:fixed;z-index:20;pointer-events:none;max-width:280px;
+    background:rgba(10,14,18,.92);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);
+    border-radius:10px;padding:9px 12px;backdrop-filter:blur(8px);transition:border-color .4s}
+  #tooltip .tt-region{font-family:var(--m);font-size:9px;letter-spacing:.22em;
+    text-transform:uppercase;color:var(--accent-2);transition:color .4s}
+  #tooltip .tt-label{font-size:13px;font-weight:600;margin:3px 0}
+  #tooltip .tt-sub{font-size:11px;color:var(--muted)}
+
+  /* inspector panel */
+  #panel{position:fixed;right:0;top:0;bottom:0;width:min(400px,92vw);z-index:30;
+    background:rgba(8,11,15,.94);
+    border-left:1px solid color-mix(in srgb,var(--accent) 28%,transparent);
+    backdrop-filter:blur(12px);padding:22px 24px;overflow-y:auto;transition:border-color .4s}
+  #panel[hidden]{display:none}
+  #p-close{position:absolute;right:16px;top:14px;background:none;border:0;color:var(--muted);
+    font-size:20px;cursor:pointer;line-height:1;padding:4px}
+  #p-close:hover{color:#fff}
+  #p-badge{display:inline-block;font-family:var(--m);font-size:9px;letter-spacing:.18em;
+    text-transform:uppercase;color:var(--accent-2);
+    border:1px solid color-mix(in srgb,var(--accent) 45%,transparent);border-radius:99px;
+    padding:3px 10px;margin-bottom:10px;transition:color .4s,border-color .4s}
+  #p-title{font-size:18px;font-weight:700;margin:0 0 7px;letter-spacing:-.01em}
+  #p-meta{font-family:var(--m);font-size:10.5px;color:var(--muted);margin-bottom:13px;
+    word-break:break-all;line-height:1.6}
+  #p-body{font-size:12.5px;line-height:1.68;color:#cfd6da;white-space:pre-wrap;
+    border-top:1px solid rgba(255,255,255,.08);padding-top:13px}
+  #p-nb-h{font-family:var(--m);font-size:9.5px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--muted);margin:18px 0 7px}
+  .p-nb{display:block;width:100%;text-align:left;
+    background:color-mix(in srgb,var(--accent) 8%,transparent);
+    border:1px solid color-mix(in srgb,var(--accent) 20%,transparent);
+    border-radius:8px;color:var(--accent-2);font-family:var(--m);
+    font-size:11.5px;padding:8px 11px;margin:5px 0;cursor:pointer;transition:.15s}
+  .p-nb:hover{background:color-mix(in srgb,var(--accent) 18%,transparent);
+    border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+
+  /* search + legend */
+  #search{position:fixed;top:20px;right:22px;z-index:25;width:240px;
+    background:rgba(10,14,18,.85);border:1px solid color-mix(in srgb,var(--accent) 35%,transparent);
+    border-radius:99px;color:#fff;font-family:var(--m);font-size:11.5px;padding:9px 16px;
+    outline:0;transition:border-color .4s,box-shadow .15s}
+  #search::placeholder{color:var(--muted)}
+  #search:focus{border-color:var(--accent-2);
+    box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 18%,transparent)}
+  #legend{position:fixed;bottom:20px;right:22px;z-index:25;display:flex;gap:7px;flex-wrap:wrap;
+    justify-content:flex-end;max-width:60vw}
+  .chip{background:rgba(10,14,18,.8);border:1px solid var(--c);color:var(--c);
+    border-radius:99px;font-family:var(--m);font-size:10px;letter-spacing:.09em;
+    padding:6px 12px;cursor:pointer;transition:.15s}
+  .chip:hover{background:color-mix(in srgb,var(--c) 15%,transparent)}
+  .chip[aria-pressed="false"]{opacity:.32;border-style:dashed}
+  .chip:focus-visible,#search:focus-visible,.p-nb:focus-visible,#p-close:focus-visible{
+    outline:2px solid var(--accent-2);outline-offset:2px}
+</style>
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.174.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.174.0/examples/jsm/"
+  }
+}
+</script>
+</head>
+<body>
+<canvas id="view"></canvas>
+<div id="labels"></div>
+<div id="hud" class="hudframe">
+  <div class="t">LIVING MIND</div>
+  <div class="s">Paras AI 2.0 · drag to orbit · scroll to dive</div>
+</div>
+<div id="stats">loading…</div>
+
+<input id="search" type="text" placeholder="search the mind — Enter to fly" aria-label="Search nodes">
+<div id="legend" role="group" aria-label="Region toggles"></div>
+
+<div id="tooltip" class="hudframe" hidden>
+  <div class="tt-region"></div>
+  <div class="tt-label"></div>
+  <div class="tt-sub"></div>
+</div>
+
+<aside id="panel" aria-label="Node inspector" hidden>
+  <button id="p-close" aria-label="Close">×</button>
+  <span id="p-badge"></span>
+  <h2 id="p-title"></h2>
+  <div id="p-meta"></div>
+  <div id="p-body"></div>
+  <div id="p-nb-h">nearest in the mind</div>
+  <div id="p-neighbors"></div>
+</aside>
+
+<script type="module" src="./scene.js"></script>
+</body>
+</html>

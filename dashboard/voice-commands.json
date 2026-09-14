@@ -1,0 +1,131 @@
+{
+  "_note": "STRICT WHITELIST for the Jarvis voice layer. Nothing outside this file is ever executed. type=read_only runs a local zero-side-effect query immediately. type=gated runs an AGENT (LLM cost + outward-facing artifact) and NEVER fires without a separate confirm — CLAUDE.md §5 sends/publish/money/ad-spend are gated by law, and every other agent run is gated too because voice is a low-confidence input channel (mis-transcription must never cost a run). Edit + restart the server to change the whitelist.",
+  "_schema": "id | description (what the classifier matches on) | phrases (examples, matching aid only) | type | run{tool,args|builtin|agent,task} | params{name:hint} | reply (spoken template, {placeholders} come from the summarizer or params)",
+  "commands": [
+    {
+      "id": "system_status",
+      "description": "Health/status of the connected systems and integrations — GoHighLevel, n8n, AiSensy, Anthropic, Obsidian, etc. Is everything online, what is broken, systems check.",
+      "phrases": ["system status", "are we online", "systems check", "what's connected", "is anything broken", "status report"],
+      "type": "read_only",
+      "run": { "tool": "check_connections.py", "args": ["--json"] },
+      "reply": "Systems check: {connected} of {total} connected. Needing attention: {issues}."
+    },
+    {
+      "id": "agent_roster",
+      "description": "How many agents exist in the OS and which ones — the agent roster, the team, who can I call on.",
+      "phrases": ["how many agents do I have", "list the agents", "who's on the team", "agent roster"],
+      "type": "read_only",
+      "run": { "builtin": "agents" },
+      "reply": "You have {count} agents on the roster, including {sample}."
+    },
+    {
+      "id": "recent_runs",
+      "description": "The recent agent run log — what has run lately, what the last agent run was, recent activity or history of the OS.",
+      "phrases": ["what ran recently", "last agent run", "recent activity", "what have the agents been doing"],
+      "type": "read_only",
+      "run": { "tool": "os_brain.py", "args": ["runs", "10", "--json"] },
+      "reply": "Last run: {agent}, {status}. {summary}. {count} runs in the recent log."
+    },
+    {
+      "id": "brain_stats",
+      "description": "Size and shape of the OS knowledge base / brain — how many documents or words the OS knows, corpus stats.",
+      "phrases": ["how big is the brain", "knowledge base stats", "how many documents do you know", "brain stats"],
+      "type": "read_only",
+      "run": { "tool": "os_brain.py", "args": ["stats", "--json"] },
+      "reply": "The brain holds {documents} documents, about {words} words, across {sources} sources."
+    },
+    {
+      "id": "brain_search",
+      "description": "Search the OS knowledge base for a specific topic and read back the best match. Use whenever Paras asks what the OS knows, says, or has written ABOUT a named subject.",
+      "phrases": ["what do we know about the founding price", "search the brain for dead lead revival", "look up the compliance rules", "find our notes on the realtor funnel"],
+      "type": "read_only",
+      "params": { "query": "the topic or phrase to search for, in Paras's own words" },
+      "run": { "tool": "os_brain.py", "args": ["search", "{query}", "--json"] },
+      "reply": "Best match for {query}: {file}. {snippet}"
+    },
+
+    {
+      "id": "daily_brief",
+      "description": "A short spoken business brief from the Chief of Staff — where things stand, what matters today, what to do next across the three communities and DFY.",
+      "phrases": ["give me the brief", "what should I focus on today", "how are we doing", "brief me", "state of the business"],
+      "type": "gated",
+      "gate_reason": "Runs the orchestrator, which plans and routes across the whole OS — never fire that on an unconfirmed transcript.",
+      "run": {
+        "agent": "orchestrator",
+        "task": "Give Paras a spoken-length brief (max 120 words, plain sentences, no markdown, no bullet characters): where the business stands right now, the single highest-leverage thing to do today, and one risk to watch. Ground it in the constitution and shared context only — do not invent metrics you were not given."
+      },
+      "summary": "Have the orchestrator write today's business brief",
+      "reply": "Here's your brief. {preview} Full version is on the dashboard."
+    },
+    {
+      "id": "nurture_sequence_draft",
+      "description": "Design or fix a nurture / follow-up / re-engagement sequence — webinar reminders, no-show recovery, HOT-WARM-COLD lane follow-up.",
+      "phrases": ["draft the webinar nurture", "fix the follow-up sequence", "design a no-show recovery flow", "build the nurture for next week's webinar"],
+      "type": "gated",
+      "gate_reason": "Produces WhatsApp/email copy destined to go out — CLAUDE.md §5 keeps anything on the send path behind an approval gate.",
+      "params": { "brief": "what the sequence is for, in Paras's own words (audience, event, lane)" },
+      "run": {
+        "agent": "nurture-sequencer",
+        "task": "Design the nurture sequence for this request: {brief}\n\nGive the full message-by-message sequence with timing. These are DRAFTS awaiting Paras's approval — do not claim anything was sent."
+      },
+      "summary": "Have the nurture-sequencer draft a follow-up sequence",
+      "reply": "The nurture sequencer has drafted it. {preview} Full sequence is on the dashboard, awaiting your approval before anything goes out."
+    },
+    {
+      "id": "whatsapp_broadcast_draft",
+      "description": "Anything about sending a WhatsApp or AiSensy message, broadcast, or template to the community or a lead list.",
+      "phrases": ["send today's WhatsApp nurture", "broadcast to the community", "message the WhatsApp group", "fire the AiSensy campaign"],
+      "type": "gated",
+      "gate_reason": "CLAUDE.md §5 — WhatsApp broadcasts are approval-gated. Confirming here only produces the send-ready draft and the send plan; the actual API fire still needs Paras's explicit approved-send step.",
+      "params": { "brief": "what the message is about and who it goes to" },
+      "run": {
+        "agent": "aisensy-operator",
+        "task": "Prepare this WhatsApp send: {brief}\n\nReturn the exact template/message copy, the audience, the timing, and the test-to-Paras-first plan. Do NOT claim the message was sent — this is a send-ready draft awaiting Paras's approval."
+      },
+      "summary": "Have the AiSensy operator prepare a WhatsApp send (draft only)",
+      "reply": "Draft ready. {preview} It is staged on the dashboard — nothing has been sent, and the send itself still needs your approval."
+    },
+    {
+      "id": "content_plan_draft",
+      "description": "Create content — a post, script, editorial calendar, campaign message, or anything to be published on YouTube, Instagram, LinkedIn or elsewhere.",
+      "phrases": ["write me a post about churn", "plan next week's content", "draft a YouTube script on AI agents", "make content for the launch"],
+      "type": "gated",
+      "gate_reason": "CLAUDE.md §5 — publishing is approve-once. Content leaves the building, so it does not auto-fire from a voice transcript.",
+      "params": { "brief": "the topic, platform, and audience in Paras's own words" },
+      "run": {
+        "agent": "content-creator",
+        "task": "Create this content: {brief}\n\nApply the per-community voice and the §4 compliance rules (education only, no income or return claims). This is a draft for Paras's review before publishing."
+      },
+      "summary": "Have the content brain draft this content",
+      "reply": "Draft written. {preview} It's on the dashboard for your review before anything gets published."
+    },
+    {
+      "id": "ads_audit",
+      "description": "Review, audit, or diagnose Meta ad performance, ad spend, wasted budget, or tracking gaps.",
+      "phrases": ["audit the ads", "how are the ads doing", "where are we wasting ad spend", "check the meta campaigns"],
+      "type": "gated",
+      "gate_reason": "CLAUDE.md §5 — anything touching ad spend stays human-owned. The audit is analysis only and changes nothing, but it stays gated so no ads path is ever voice-triggered.",
+      "params": { "brief": "which account, vertical, or campaign to look at" },
+      "run": {
+        "agent": "paid-media-auditor",
+        "task": "Audit this: {brief}\n\nRead-only analysis — produce a prioritized fix list. Never propose a spend change as executed; budget changes stay with Paras and the ads manager."
+      },
+      "summary": "Have the paid-media auditor review the ads (analysis only, no spend changes)",
+      "reply": "Audit done. {preview} Full fix list is on the dashboard. No spend was changed."
+    },
+    {
+      "id": "ghl_pipeline_audit",
+      "description": "Anything about the CRM — GoHighLevel contacts, tags, pipelines, opportunities, calendars, appointments, or data hygiene.",
+      "phrases": ["check the pipeline", "audit the CRM", "how many leads are in the funnel", "clean up the GHL tags"],
+      "type": "gated",
+      "gate_reason": "The GHL operator writes to the live CRM. A mis-heard transcript must never reach a CRM write path.",
+      "params": { "brief": "what to check or change in GHL" },
+      "run": {
+        "agent": "ghl-operator",
+        "task": "Handle this GoHighLevel request: {brief}\n\nStart read-only: report what you find. Any write (tag, contact, pipeline, calendar change) must be listed as a proposed action for Paras's approval, not described as done."
+      },
+      "summary": "Have the GHL operator inspect the CRM and propose actions",
+      "reply": "Done. {preview} Details are on the dashboard — proposed CRM changes are waiting on you, nothing was written."
+    }
+  ]
+}
